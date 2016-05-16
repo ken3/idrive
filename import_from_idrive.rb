@@ -15,7 +15,7 @@
 
 ARGV.each do |f|
     begin
-        music = File.binread(f).bytes.collect{|c| c^0xff}.pack("C*")
+        music = File.binread(f).bytes.collect{|c| ~c}.pack("C*")
         puts "#{f} size=#{music.size}"
         File.binwrite("#{f}.music", music)
     rescue => e
